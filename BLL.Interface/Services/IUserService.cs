@@ -5,20 +5,16 @@ namespace BLL.Interface.Services
 {
     public interface IUserService
     {
-        IEnumerable<RoleEntity> GetUserRoleEntities(int userId);
+        UserEntity GetUserEntity(int id);
+        UserEntity GetUserEntityByLogin(string login);
+        UserEntity GetUserEntityByEmail(string email);
 
-        RoleEntity GetRoleEntity(int id);
-        RoleEntity GetRoleEntityByName(string roleName);
+        IEnumerable<UserEntity> GetAllUserEntities();
 
-        IEnumerable<RoleEntity> GetAllRoleEntities();
+        bool ValidateUser(string login, string password);
 
-        IEnumerable<UserEntity> GetUserEntitiesInRole(string roleName);
-
-        void AddUsersToRoles(ICollection<UserEntity> users, ICollection<RoleEntity> roles);
-        void RemoveUsersFromRoles(ICollection<UserEntity> users, ICollection<RoleEntity> roles);
-
-        void CreateRole(RoleEntity role);
-        void DeleteRole(RoleEntity role);
-        void UpdateRole(RoleEntity role);
+        void CreateUser(UserEntity user);
+        void DeleteUser(UserEntity user);
+        void UpdateUser(UserEntity user);
     }
 }

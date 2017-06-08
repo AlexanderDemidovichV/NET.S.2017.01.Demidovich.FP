@@ -16,12 +16,9 @@ namespace MvcPL
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //IQueryable<Field> query;
-            //using (var ctx = new EntityModel())
-            //{
-            //    query = ctx.Fields;
-            //}
-            //var count = query.Count();
+            
+            
+            
         }
     }
 }

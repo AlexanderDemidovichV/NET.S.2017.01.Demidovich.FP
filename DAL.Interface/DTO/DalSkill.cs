@@ -14,6 +14,6 @@ namespace DAL.Interface.DTO
 
         public int FieldId { get; set; }
 
-        public virtual ICollection<DalMark> Marks { get; set; }
+        public IEnumerable<DalMark> Marks { get; set; }
     }
 }

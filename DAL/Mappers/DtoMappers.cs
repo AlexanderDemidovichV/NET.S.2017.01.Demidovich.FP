@@ -1,14 +1,18 @@
-﻿using BLL.Interface.Entities;
-using DAL.Interface.DTO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DAL.Interface.DTO;
+using ORM.Entities;
 
-namespace BLL.Mappers
+namespace DAL.Mappers
 {
-    public static class BllEntityMappers
+    public static class DtoMappers
     {
-        public static DalUser ToDalUser(this UserEntity user)
+        public static DalUser ToDalUser(this User user)
         {
-            return new DalUser()
+            return new DalUser
             {
                 Id = user.Id,
                 Login = user.Login,
@@ -18,9 +22,9 @@ namespace BLL.Mappers
             };
         }
 
-        public static UserEntity ToBllUser(this DalUser user)
+        public static User ToOrmUser(this DalUser user)
         {
-            return new UserEntity()
+            return new User
             {
                 Id = user.Id,
                 Login = user.Login,
@@ -31,7 +35,7 @@ namespace BLL.Mappers
         }
 
 
-        public static DalProfile ToDalProfile(this ProfileEntity profile)
+        public static DalProfile ToDalProfile(this Profile profile)
         {
             return new DalProfile
             {
@@ -41,9 +45,9 @@ namespace BLL.Mappers
             };
         }
 
-        public static ProfileEntity ToBllProfile(this DalProfile profile)
+        public static Profile ToOrmProfile(this DalProfile profile)
         {
-            return new ProfileEntity
+            return new Profile
             {
                 Id = profile.Id,
                 ImageData = profile.ImageData,
@@ -52,7 +56,7 @@ namespace BLL.Mappers
         }
 
 
-        public static DalRole ToDalRole(this RoleEntity role)
+        public static DalRole ToDalRole(this Role role)
         {
             return new DalRole
             {
@@ -62,9 +66,9 @@ namespace BLL.Mappers
             };
         }
 
-        public static RoleEntity ToBllRole(this DalRole role)
+        public static Role ToOrmRole(this DalRole role)
         {
-            return new RoleEntity
+            return new Role
             {
                 Id = role.Id,
                 Name = role.Name,
@@ -73,69 +77,65 @@ namespace BLL.Mappers
         }
 
 
-        public static DalField ToDalField(this FieldEntity field)
+        public static DalField ToDalField(this Field board)
         {
             return new DalField
+            {
+                Id = board.Id,
+                Name = board.Name
+            };
+        }
+
+        public static Field ToOrmField(this DalField field)
+        {
+            return new Field
             {
                 Id = field.Id,
                 Name = field.Name
             };
         }
 
-        public static FieldEntity ToBllField(this DalField field)
-        {
-            var skills = field.Skills.ToList().Select(s => s.ToBllSkill());
 
-            return new FieldEntity
-            {
-                Id = field.Id,
-                Name = field.Name,
-                Skills = skills
-            };
-        }
-
-
-        public static DalSkill ToDalSkill(this SkillEntity skill)
+        public static DalSkill ToDalSkill(this Skill skill)
         {
             return new DalSkill
             {
                 Id = skill.Id,
+                FieldId = skill.FieldId,
                 Name = skill.Name
             };
         }
 
-        public static SkillEntity ToBllSkill(this DalSkill skill)
+        public static Skill ToOrmSkill(this DalSkill skill)
         {
-            var marks = skill.Marks.ToList().Select(m => m.ToBllMark());
-
-            return new SkillEntity
+            return new Skill
             {
                 Id = skill.Id,
-                Name = skill.Name,
-                Marks = marks
+                FieldId = skill.FieldId,
+                Name = skill.Name
             };
         }
 
 
-        public static DalMark ToDalMark(this MarkEntity mark)
+        public static DalMark ToDalMark(this Mark mark)
         {
             return new DalMark
             {
                 Id = mark.Id,
-                SkillId = mark.SkillId,
                 UserId = mark.UserId,
-                Value = mark.Value
+                Value = mark.Value,
+                SkillId = mark.SkillId
             };
         }
 
-        public static MarkEntity ToBllMark(this DalMark mark)
+        public static Mark ToOrmMark(this DalMark mark)
         {
-            return new MarkEntity
+            return new Mark
             {
                 Id = mark.Id,
-                SkillId = mark.SkillId,
                 UserId = mark.UserId,
-                Value = mark.Value
+                Value = mark.Value,
+                SkillId = mark.SkillId
             };
         }
     }
