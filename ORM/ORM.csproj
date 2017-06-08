@@ -47,11 +47,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\FieldConfig.cs" />
+    <Compile Include="Configurations\MarkConfig.cs" />
+    <Compile Include="Configurations\ProfileConfig.cs" />
+    <Compile Include="Configurations\RoleConfig.cs" />
+    <Compile Include="Configurations\SkillConfig.cs" />
+    <Compile Include="Configurations\UserConfig.cs" />
+    <Compile Include="Entities\Field.cs" />
+    <Compile Include="Entities\Mark.cs" />
+    <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Skill.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="EntityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Initializers\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

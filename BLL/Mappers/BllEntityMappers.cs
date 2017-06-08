@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BLL.Interface.Entities;
+using DAL.Interface.DTO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Mappers
 {
@@ -115,7 +113,7 @@ namespace BLL.Mappers
             };
         }
 
-        public static TopicEntity ToBllTopic(this DalTopic topic)
+        public static SkillEntity ToBllSkill(this DalSkill topic)
         {
             var posts = topic.Posts.ToList().Select(t => t.ToBLLPost());
 
@@ -131,29 +129,25 @@ namespace BLL.Mappers
         }
 
 
-        public static DalPost ToDalPost(this PostEntity post)
+        public static DalMark ToDalMark(this MarkEntity mark)
         {
-            return new DalPost
+            return new DalMark
             {
-                Id = post.Id,
-                TopicId = post.TopicId,
-                UserId = post.UserId,
-                Text = post.Text,
-                CreationDate = post.CreationDate,
-                Reported = post.Reported
+                Id = mark.Id,
+                SkillId = mark.SkillId,
+                UserId = mark.UserId,
+                Value = mark.Value
             };
         }
 
-        public static PostEntity ToBLLPost(this DalPost post)
+        public static MarkEntity ToBllMark(this DalMark mark)
         {
-            return new PostEntity
+            return new MarkEntity
             {
-                Id = post.Id,
-                TopicId = post.TopicId,
-                UserId = post.UserId,
-                Text = post.Text,
-                CreationDate = post.CreationDate,
-                Reported = post.Reported
+                Id = mark.Id,
+                SkillId = mark.SkillId,
+                UserId = mark.UserId,
+                Value = mark.Value
             };
         }
     }
