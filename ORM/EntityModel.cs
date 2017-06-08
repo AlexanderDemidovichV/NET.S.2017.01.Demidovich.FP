@@ -1,10 +1,16 @@
 ﻿using System.Data.Entity;
 using ORM.Entities;
+using ORM.Initializers;
 
 namespace ORM
 {
     public class EntityModel: DbContext
     {
+        static EntityModel()
+        {
+            Database.SetInitializer(new KnowledgeSystemDbInitializer());
+        }
+
         public EntityModel()
             : base()
         {
