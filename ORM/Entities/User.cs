@@ -8,7 +8,7 @@ namespace ORM.Entities
         public User()
         {
             Roles = new HashSet<Role>();
-            Skills = new List<Skill>();
+            Ratings = new List<Rating>();
         }
 
         public int Id { get; set; }
@@ -24,6 +24,6 @@ namespace ORM.Entities
         public virtual Profile Profile { get; set; }
 
         public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<Skill> Skills { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

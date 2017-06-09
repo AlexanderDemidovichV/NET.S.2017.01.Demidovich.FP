@@ -56,11 +56,13 @@
   <ItemGroup>
     <Compile Include="Configurations\FieldConfig.cs" />
     <Compile Include="Configurations\ProfileConfig.cs" />
+    <Compile Include="Configurations\RatingConfig.cs" />
     <Compile Include="Configurations\RoleConfig.cs" />
     <Compile Include="Configurations\SkillConfig.cs" />
     <Compile Include="Configurations\UserConfig.cs" />
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\Rating.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Skill.cs" />
     <Compile Include="Entities\User.cs" />

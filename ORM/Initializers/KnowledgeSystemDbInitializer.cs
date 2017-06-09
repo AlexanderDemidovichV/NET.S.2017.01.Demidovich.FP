@@ -70,6 +70,23 @@ namespace ORM.Initializers
 
             #endregion
 
+            #region SubFields
+
+            fields.Find(f => f.Name == "Web Development").
+                SubFields = new List<Field>
+                {
+                    new Field
+                    {
+                        Name = "Front-End"
+                    },
+                    new Field
+                    {
+                        Name = "Back-End"
+                    }
+                };
+
+            #endregion
+
             #region Skills
 
             fields.Find(b => b.Name == "Web Development")
@@ -77,15 +94,13 @@ namespace ORM.Initializers
             {
                 new Skill
                 {
-                    Name = "Java Script Basic",
-                    Marks = new List<Mark>  
-                    {
-                        new Mark
-                        {
-                            User = users[0],
-                            Value = 7
-                        }
-                    }
+                    Rating = "Novice",
+                    User = users[0]
+                },
+                new Skill
+                {
+                    Rating = "Novice",
+                    User = users[0]
                 }
             };
 

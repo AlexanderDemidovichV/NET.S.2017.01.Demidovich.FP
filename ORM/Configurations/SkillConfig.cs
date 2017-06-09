@@ -9,13 +9,13 @@ namespace ORM.Configurations
         {
             HasKey(s => s.Id);
 
-            Property(s => s.Rating)
-                .IsRequired();
+            Property(s => s.Subject)
+                .IsRequired()
+                .HasMaxLength(200);
 
-            HasRequired(s => s.User)
-                .WithMany(u => u.Skills)
-                .HasForeignKey(m => m.UserId)
-                .WillCascadeOnDelete(false);
+            HasMany(s => s.Ratings)
+                .WithRequired(r => r.Skill)
+                .HasForeignKey(r => r.SkillId);
         }
     }
 }
