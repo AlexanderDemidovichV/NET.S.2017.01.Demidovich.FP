@@ -100,42 +100,42 @@ namespace BLL.Mappers
             return new DalSkill
             {
                 Id = skill.Id,
-                Name = skill.Name
+                Subject = skill.Subject
             };
         }
 
         public static SkillEntity ToBllSkill(this DalSkill skill)
         {
-            var marks = skill.Marks.ToList().Select(m => m.ToBllMark());
+            var ratings = skill.Ratings.ToList().Select(m => m.ToBllRating());
 
             return new SkillEntity
             {
                 Id = skill.Id,
-                Name = skill.Name,
-                Marks = marks
+                Subject = skill.Subject,
+                Ratings = ratings
             };
         }
 
 
-        public static DalMark ToDalMark(this MarkEntity mark)
+        public static DalRating ToDalRating(this RatingEntity rating)
         {
-            return new DalMark
+            return new DalRating
             {
-                Id = mark.Id,
-                SkillId = mark.SkillId,
-                UserId = mark.UserId,
-                Value = mark.Value
+                Id = rating.Id,
+                SkillId = rating.SkillId,
+                UserId = rating.UserId,
+                Value = rating.Value
             };
         }
 
-        public static MarkEntity ToBllMark(this DalMark mark)
+        public static RatingEntity ToBllRating(this DalRating rating)
         {
-            return new MarkEntity
+            return new RatingEntity
             {
-                Id = mark.Id,
-                SkillId = mark.SkillId,
-                UserId = mark.UserId,
-                Value = mark.Value
+                Id = rating.Id,
+                SkillId = rating.SkillId,
+                UserId = rating.UserId,
+                Value = rating.Value
             };
         }
     }

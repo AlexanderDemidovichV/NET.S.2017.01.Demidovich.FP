@@ -41,15 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\FieldEntity.cs" />
-    <Compile Include="Entities\MarkEntity.cs" />
     <Compile Include="Entities\ProfileEntity.cs" />
+    <Compile Include="Entities\RatingEntity.cs" />
     <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\SkillEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IFieldService.cs" />
-    <Compile Include="Services\IMarkService.cs" />
     <Compile Include="Services\IProfileService.cs" />
+    <Compile Include="Services\IRatingService.cs" />
     <Compile Include="Services\IRoleService.cs" />
     <Compile Include="Services\ISkillService.cs" />
     <Compile Include="Services\IUserService.cs" />

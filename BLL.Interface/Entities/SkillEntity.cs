@@ -6,12 +6,14 @@ namespace BLL.Interface.Entities
     {
         public SkillEntity()
         {
-            Marks = new List<MarkEntity>();
+            Ratings = new List<RatingEntity>();
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int FieldId { get; set; }
 
-        public IEnumerable<MarkEntity> Marks { get; set; }
+        public string Subject { get; set; }
+
+        public IEnumerable<RatingEntity> Ratings { get; set; }
     }
 }
