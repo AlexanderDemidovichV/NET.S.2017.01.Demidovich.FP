@@ -50,10 +50,10 @@ namespace DAL.Concrete
             if (skill == null)
                 return null;
 
-            skill.Marks = context.Set<Mark>()
-                .Where(m => m.SkillId == skill.Id)
+            skill.Ratings = context.Set<Rating>()
+                .Where(r =>r.SkillId == skill.Id)
                 .ToList()
-                .Select(m => m.ToDalMark());
+                .Select(r => r.ToDalRating());
 
             return skill;
         }

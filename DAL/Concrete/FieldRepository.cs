@@ -36,7 +36,6 @@ namespace DAL.Concrete
                 .Add(field.ToOrmField());
         }
 
-
         public IEnumerable<DalField> GetAll()
         {
             return context.Set<Field>()
@@ -52,6 +51,11 @@ namespace DAL.Concrete
 
             if (field == null)
                 return null;
+
+            field.SubFields = context.Set<Field>()
+                .Where(f => f.ParentFieldId == field.Id)
+                .ToList()
+                .Select(f => f.ToDalField());
 
             field.Skills = context.Set<Skill>()
                 .Where(s => s.FieldId == field.Id)
@@ -83,6 +87,9 @@ namespace DAL.Concrete
                 return 0;
 
             int count = field.Skills.Count;
+
+            foreach (var subField in field.SubFields)
+                count += GetFieldSkillsCount(subField.Id);
 
             return count;
         }

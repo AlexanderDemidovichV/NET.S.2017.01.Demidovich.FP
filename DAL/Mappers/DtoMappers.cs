@@ -102,7 +102,7 @@ namespace DAL.Mappers
             {
                 Id = skill.Id,
                 FieldId = skill.FieldId,
-                Name = skill.Name
+                Subject = skill.Subject
             };
         }
 
@@ -112,30 +112,30 @@ namespace DAL.Mappers
             {
                 Id = skill.Id,
                 FieldId = skill.FieldId,
-                Name = skill.Name
+                Subject = skill.Subject
             };
         }
 
 
-        public static DalMark ToDalMark(this Mark mark)
+        public static DalRating ToDalRating(this Rating rating)
         {
-            return new DalMark
+            return new DalRating
             {
-                Id = mark.Id,
-                UserId = mark.UserId,
-                Value = mark.Value,
-                SkillId = mark.SkillId
+                Id = rating.Id,
+                UserId = rating.UserId,
+                Value = rating.Value,
+                SkillId = rating.SkillId
             };
         }
 
-        public static Mark ToOrmMark(this DalMark mark)
+        public static Rating ToOrmRating(this DalRating rating)
         {
-            return new Mark
+            return new Rating
             {
-                Id = mark.Id,
-                UserId = mark.UserId,
-                Value = mark.Value,
-                SkillId = mark.SkillId
+                Id = rating.Id,
+                UserId = rating.UserId,
+                Value = rating.Value,
+                SkillId = rating.SkillId
             };
         }
     }

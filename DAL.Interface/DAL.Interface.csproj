@@ -41,16 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DalField.cs" />
-    <Compile Include="DTO\DalMark.cs" />
     <Compile Include="DTO\DalProfile.cs" />
+    <Compile Include="DTO\DalRating.cs" />
     <Compile Include="DTO\DalRole.cs" />
     <Compile Include="DTO\DalSkill.cs" />
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Interface\Repository\IFieldRepository.cs" />
-    <Compile Include="Interface\Repository\IMarkRepository.cs" />
     <Compile Include="Interface\Repository\IProfileRepository.cs" />
+    <Compile Include="Interface\Repository\IRatingRepository.cs" />
     <Compile Include="Interface\Repository\IRepository.cs" />
     <Compile Include="Interface\Repository\IRoleRepository.cs" />
     <Compile Include="Interface\Repository\ISkillRepository.cs" />

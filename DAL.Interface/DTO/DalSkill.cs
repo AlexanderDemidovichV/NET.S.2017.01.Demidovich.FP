@@ -6,14 +6,15 @@ namespace DAL.Interface.DTO
     {
         public DalSkill()
         {
-            Marks = new List<DalMark>();
+            Ratings = new List<DalRating>();
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+
+        public string Subject { get; set; }
 
         public int FieldId { get; set; }
 
-        public IEnumerable<DalMark> Marks { get; set; }
+        public IEnumerable<DalRating> Ratings { get; set; }
     }
 }
