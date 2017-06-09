@@ -1,18 +1,52 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Glegoo);
+
+body {
+    font-family: FontAwesome, sans-serif;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: FontAwesome, sans-serif;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+span {
+    font-family: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
+p, label {
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.forum .forum-post-panel {
+    margin-bottom: 1em;
+}
+
+.forum.media-list li img.avatar {
+    display: block;
+    margin: 0 auto;
+}
+
+.forum.media-list li .user-info {
+    text-align: center;
+    width: 8em;
+}
+
+@media (max-width: 760px) {
+    .forum.media-list li .user-info {
+        float: none;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+}
