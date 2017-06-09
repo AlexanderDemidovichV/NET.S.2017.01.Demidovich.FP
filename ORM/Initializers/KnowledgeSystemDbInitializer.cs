@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Helpers;
 
 namespace ORM.Initializers
@@ -39,8 +40,8 @@ namespace ORM.Initializers
                 new User
                 {
                     Roles = new List<Role> {roles[2]},
-                    Login = "phil",
-                    Email = "phil@gmail.com",
+                    Login = "eva",
+                    Email = "eva@gmail.com",
                     Password = Crypto.HashPassword("111111"),
                     RegistrationDate = DateTime.Now
                 }
@@ -61,10 +62,6 @@ namespace ORM.Initializers
                 new Field
                 {
                     Name = "Mobile Development"
-                },
-                new Field
-                {
-                    Name = "Desktop Development"
                 }
             };
 
@@ -94,15 +91,23 @@ namespace ORM.Initializers
             {
                 new Skill
                 {
-                    Rating = "Novice",
-                    User = users[0]
-                },
-                new Skill
-                {
-                    Rating = "Novice",
-                    User = users[0]
+                    Subject = "jQuery",
+                    Ratings = new List<Rating>
+                    {
+                        new Rating
+                        {
+                            User = users[0],
+                            Value = 0
+                        },
+                        new Rating
+                        {
+                            User = users[1],
+                            Value = 1
+                        },
+                    }
                 }
             };
+
 
             #endregion
 

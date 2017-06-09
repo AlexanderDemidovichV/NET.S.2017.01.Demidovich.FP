@@ -22,6 +22,7 @@ namespace ORM
 
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<Field> Fields { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,6 +33,7 @@ namespace ORM
             modelBuilder.Configurations.Add(new Configurations.ProfileConfig());
             modelBuilder.Configurations.Add(new Configurations.SkillConfig());
             modelBuilder.Configurations.Add(new Configurations.FieldConfig());
+            modelBuilder.Configurations.Add(new Configurations.RatingConfig());
         }
     }
 }

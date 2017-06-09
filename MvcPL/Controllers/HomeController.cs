@@ -15,7 +15,7 @@ namespace MvcPL.Controllers
             using (var ctx = new EntityModel())
             {
                 var query = ctx.Fields;
-                //var count = query.Count();
+                var count = query.Count();
             }
             return View();
         }
