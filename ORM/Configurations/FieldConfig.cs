@@ -16,6 +16,10 @@ namespace ORM.Configurations
             HasMany(f => f.Skills)
                 .WithRequired(s => s.Field)
                 .HasForeignKey(s => s.FieldId);
+
+            HasMany(f => f.SubFields)
+                .WithOptional(f => f.ParentField)
+                .HasForeignKey(f => f.ParentFieldId);
         }
     }
 }

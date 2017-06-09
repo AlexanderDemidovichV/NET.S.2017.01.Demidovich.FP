@@ -22,7 +22,6 @@ namespace ORM
 
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<Field> Fields { get; set; }
-        public virtual DbSet<Mark> Marks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,7 +30,6 @@ namespace ORM
             modelBuilder.Configurations.Add(new Configurations.RoleConfig());
             modelBuilder.Configurations.Add(new Configurations.UserConfig());
             modelBuilder.Configurations.Add(new Configurations.ProfileConfig());
-            modelBuilder.Configurations.Add(new Configurations.MarkConfig());
             modelBuilder.Configurations.Add(new Configurations.SkillConfig());
             modelBuilder.Configurations.Add(new Configurations.FieldConfig());
         }

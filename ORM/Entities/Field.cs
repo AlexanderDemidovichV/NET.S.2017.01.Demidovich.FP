@@ -6,6 +6,7 @@ namespace ORM.Entities
     {
         public Field()
         {
+            SubFields = new List<Field>();
             Skills = new List<Skill>();
         }
 
@@ -13,6 +14,10 @@ namespace ORM.Entities
 
         public string Name { get; set; }
 
+        public int? ParentFieldId { get; set; }
+        public virtual Field ParentField { get; set; }
+
         public virtual ICollection<Skill> Skills { get; set; }
+        public virtual ICollection<Field> SubFields { get; set; }
     }
 }
