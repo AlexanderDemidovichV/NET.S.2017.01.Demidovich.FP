@@ -40,7 +40,7 @@ namespace BLL.Services
         public IEnumerable<SkillEntity> FindSkills(string term)
         {
             return skillRepository.GetAll()
-                .Where(s => s.Name.ToUpper().Contains(term.ToUpper()))
+                .Where(s => s.Subject.ToUpper().Contains(term.ToUpper()))
                 .Select(s => s.ToBllSkill());
         }
 
@@ -58,7 +58,7 @@ namespace BLL.Services
 
         public SkillEntity GetSkillByName(string name)
         {
-            return skillRepository.GetByPredicate(t => t.Name == name)
+            return skillRepository.GetByPredicate(t => t.Subject == name)
                 ?.ToBllSkill();
         }
 

@@ -133,6 +133,7 @@
     <Content Include="Content\style\content\content.css" />
     <Content Include="Content\style\footer\footer.css" />
     <Content Include="Content\style\header\header.css" />
+    <Content Include="Content\style\header\header.js" />
     <Content Include="Content\style\profile\profile.css" />
     <Content Include="Content\style\profile\profile.js" />
     <Content Include="Content\style\search\search.js" />
@@ -195,6 +196,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\MultiButtonAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,6 +215,8 @@
     <Compile Include="Models\SkillViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CustomMembershipProvider.cs" />
+    <Compile Include="Providers\CustomRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -226,6 +230,9 @@
       <Project>{2f05e9c4-9aae-41fb-bccc-89f579147c35}</Project>
       <Name>DependencyResolver</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

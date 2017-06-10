@@ -1,3 +1,5 @@
+using MvcPL.Infrastructure;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MvcPL.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MvcPL.App_Start.NinjectWebCommon), "Stop")]
 
@@ -5,6 +7,7 @@ namespace MvcPL.App_Start
 {
     using System;
     using System.Web;
+    using System.Web.Mvc;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -61,6 +64,7 @@ namespace MvcPL.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }        
     }
 }
