@@ -8,6 +8,7 @@ namespace BLL.Interface.Services
         FieldEntity GetField(int id);
 
         IEnumerable<FieldEntity> GetAllFields();
+        IEnumerable<FieldEntity> GetSubFields(int? fieldId);
 
         int GetFieldSkillsCount(int fieldId);
 

@@ -40,6 +40,13 @@ namespace BLL.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<FieldEntity> GetSubFields(int? fieldId)
+        {
+            return fieldRepository.GetAll()
+                .Where(f => f.ParentId == fieldId)
+                .Select(f => f.ToBllField());
+        }
+
         public IEnumerable<FieldEntity> GetAllFields()
         {
             return fieldRepository.GetAll()

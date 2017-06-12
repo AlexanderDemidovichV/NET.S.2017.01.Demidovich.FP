@@ -125,12 +125,14 @@
     <Content Include="Content\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap\bootstrap.css" />
     <Content Include="Content\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\cheburashka.jpg" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\guest.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\style\board\board.css" />
     <Content Include="Content\style\comment\comment.css" />
     <Content Include="Content\style\content\content.css" />
+    <Content Include="Content\style\content\content.js" />
     <Content Include="Content\style\footer\footer.css" />
     <Content Include="Content\style\header\header.css" />
     <Content Include="Content\style\header\header.js" />
@@ -169,6 +171,12 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\_Account.cshtml" />
+    <Content Include="Views\Account\Knowledges.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -199,6 +207,7 @@
     <Compile Include="Attributes\MultiButtonAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,11 +218,13 @@
     <Compile Include="Models\Input\FieldInputModel.cs" />
     <Compile Include="Models\Input\RatingInputModel.cs" />
     <Compile Include="Models\Input\SkillInputModel.cs" />
+    <Compile Include="Models\Input\UserLogInInputModel.cs" />
     <Compile Include="Models\Input\UserProfileInputModel.cs" />
     <Compile Include="Models\Input\UserRegistrationInputModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
     <Compile Include="Models\SkillViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\View\KnowledgesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomMembershipProvider.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />

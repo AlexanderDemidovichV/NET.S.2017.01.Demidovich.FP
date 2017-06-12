@@ -23,6 +23,9 @@ namespace MvcPL.Controllers
         }
 
         #endregion
+
+        #region Public Methods
+
         public ActionResult ManageUsers()
         {
             var users = _userService.GetAllUserEntities().Select(u => u.ToPlUser()).ToList();
@@ -34,5 +37,34 @@ namespace MvcPL.Controllers
 
             return View(users);
         }
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "manageUserAction", MatchFormValue = "AddRole")]
+        public ActionResult AddRole(int id, string role)
+        {
+            var user = _userService.GetUserEntity(id);
+            if (Roles.RoleExists(role) && !Roles.IsUserInRole(user.Login, role))
+            {
+                Roles.AddUserToRole(user.Login, role);
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [HttpPost]
+        [MultiButton(MatchFormKey = "manageUserAction", MatchFormValue = "RemoveRole")]
+        public ActionResult RemoveRole(int id, string role)
+        {
+            var user = _userService.GetUserEntity(id);
+            if (Roles.RoleExists(role) && Roles.IsUserInRole(user.Login, role))
+            {
+                Roles.RemoveUserFromRole(user.Login, role);
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        #endregion
+        
     }
 }
