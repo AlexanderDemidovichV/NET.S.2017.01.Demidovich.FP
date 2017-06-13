@@ -8,18 +8,14 @@
     z-index: 1050;
 }
 
-.open {
+.open12 {
     display: block;
 }
+
 .closed {
     display: none;
 }
-li {
-    list-style-type: none;
-    padding-top: .2em;
-    padding-bottom: .2em;
-    font-size: 18px;
-}
+
         
 li img {
     vertical-align: middle;

@@ -1,0 +1,73 @@
+﻿@model MvcPL.Models.FieldViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="col-md-1 col-sm-1 col-xs-1"></th>
+                <th class="col-md-6 col-sm-8 col-xs-11">
+                    <h3 class="board_table_content">@Html.ActionLink(Model.Name, "Field", "Knowledge", new { id = Model.Id }, null)</h3>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var subFields in Model.SubFields)
+            {
+                <tr>
+                    <td class="text-center">
+                        <div class="board_table_content">
+                            <i class="fa fa-2x fa-archive text-primary"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <h4 class="board_table_content">
+                            @Html.ActionLink(@subFields.Name, "Field", "Knowledge", new { id = subFields.Id }, null)
+                            <br>
+
+                        </h4>
+                    </td>
+
+
+                </tr>
+            }
+            @foreach (var skill in Model.Skills)
+            {
+                <tr>
+                    <td class="text-center">
+                        <div class="board_table_content">
+                            <i class="fa fa-2x fa-comments-o text-primary"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <h4 class="board_table_content">
+                            @Html.ActionLink(@skill.Subject, "Skill", "Knowledge", new { id = skill.Id }, null)
+                        </h4>
+                    </td>
+                    <td class="text-center hidden-xs hidden-sm">
+                        <div class="board_table_content"></div>
+                    </td>
+                    <td class="text-center hidden-xs hidden-sm">
+                        <div class="board_table_content">@skill.RatingCount</div>
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+
+        @if ((Model.SubFields == null || Model.SubFields.Count <= 0) && (Model.Skills == null || Model.Skills.Count <= 0))
+        {
+            <div class="board_empty jumbotron">
+                <h3>It's empty...</h3>
+            </div>
+        }
+
+    </div>
+</div>

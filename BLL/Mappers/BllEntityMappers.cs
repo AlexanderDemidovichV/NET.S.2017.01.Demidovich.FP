@@ -78,19 +78,23 @@ namespace BLL.Mappers
             return new DalField
             {
                 Id = field.Id,
-                Name = field.Name
+                Name = field.Name,
+                ParentId = field.ParentId
             };
         }
 
         public static FieldEntity ToBllField(this DalField field)
         {
             var skills = field.Skills.ToList().Select(s => s.ToBllSkill());
+            var subFields = field.SubFields.ToList().Select(f => f.ToBllField());
 
             return new FieldEntity
             {
                 Id = field.Id,
                 Name = field.Name,
-                Skills = skills
+                Skills = skills,
+                ParentId = field.ParentId,
+                SubFields = subFields
             };
         }
 

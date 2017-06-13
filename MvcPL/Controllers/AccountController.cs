@@ -65,9 +65,15 @@ namespace MvcPL.Controllers
                 var f = field.ToPlField();
 
                 var subFields = _fieldService.GetSubFields(f.Id).OrderBy(foa => foa.Id).Take(3);
+                foreach (var subField in subFields)
+                {
+                    f.SubFields.Add(subField.ToPlField());
+                }
+
+                knowledgeViewModel.fields.Add(f);
             }
 
-            return View();
+            return View(knowledgeViewModel);
         }
 
         [HttpGet]

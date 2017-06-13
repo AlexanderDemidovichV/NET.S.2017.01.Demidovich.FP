@@ -1,8 +1,20 @@
-﻿
+﻿@model MvcPL.Models.View.KnowledgesViewModel
+
 @{
     ViewBag.Title = "Knowledges";
 }
 
+@section Body {
+    @foreach (var field in Model.fields)
+    {
+
+        @Html.DisplayFor(f => field)
+
+    }
+
+}
+
+<!--
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <ul class="open">
@@ -55,3 +67,4 @@
     </li>
 </ul> 
 
+-->

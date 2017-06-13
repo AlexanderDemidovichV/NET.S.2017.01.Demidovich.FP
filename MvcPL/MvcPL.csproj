@@ -177,6 +177,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Shared\_Account.cshtml" />
     <Content Include="Views\Account\Knowledges.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FieldViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
