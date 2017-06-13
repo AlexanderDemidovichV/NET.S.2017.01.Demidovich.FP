@@ -77,12 +77,13 @@ namespace DAL.Mappers
         }
 
 
-        public static DalField ToDalField(this Field board)
+        public static DalField ToDalField(this Field field)
         {
             return new DalField
             {
-                Id = board.Id,
-                Name = board.Name
+                Id = field.Id,
+                Name = field.Name,
+                ParentId = field.ParentFieldId
             };
         }
 
@@ -91,7 +92,8 @@ namespace DAL.Mappers
             return new Field
             {
                 Id = field.Id,
-                Name = field.Name
+                Name = field.Name,
+                ParentFieldId = field.ParentId
             };
         }
 

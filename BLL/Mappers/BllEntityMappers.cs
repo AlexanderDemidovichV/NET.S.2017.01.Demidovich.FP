@@ -91,9 +91,9 @@ namespace BLL.Mappers
             return new FieldEntity
             {
                 Id = field.Id,
+                ParentId = field.ParentId,
                 Name = field.Name,
                 Skills = skills,
-                ParentId = field.ParentId,
                 SubFields = subFields
             };
         }
