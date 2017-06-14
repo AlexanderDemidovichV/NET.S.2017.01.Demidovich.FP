@@ -69,6 +69,20 @@ namespace BLL.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<FieldEntity> GetFieldParents(int fieldId)
+        {
+            var field = fieldRepository.GetById(fieldId).ToBllField();
+            var fieldParents = new List<FieldEntity>();
+
+            while (field.ParentId != null)
+            {
+                field = fieldRepository.GetById(field.ParentId.GetValueOrDefault()).ToBllField();
+                fieldParents.Add(field);
+            }
+
+            return fieldParents;
+        }
+
         #endregion
 
     }

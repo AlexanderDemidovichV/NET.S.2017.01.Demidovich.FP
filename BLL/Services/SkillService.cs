@@ -16,15 +16,17 @@ namespace BLL.Services
 
         private readonly IUnitOfWork uow;
         private readonly ISkillRepository skillRepository;
+        private readonly IFieldRepository fieldRepository;
 
         #endregion
 
         #region Constructor
 
-        public SkillService(IUnitOfWork uow, ISkillRepository skillRepository)
+        public SkillService(IUnitOfWork uow, ISkillRepository skillRepository, IFieldRepository fieldRepository)
         {
             this.uow = uow;
             this.skillRepository = skillRepository;
+            this.fieldRepository = fieldRepository;
         }
 
         #endregion
@@ -62,9 +64,21 @@ namespace BLL.Services
                 ?.ToBllSkill();
         }
 
-        public FieldEntity GetSkillParent(int skillId)
+        public IEnumerable<FieldEntity> GetSkillParents(int skillId)
         {
-            throw new NotImplementedException();
+            var skill = skillRepository.GetById(skillId).ToBllSkill();
+            var skillParents = new List<FieldEntity>();
+
+            var field = fieldRepository.GetById(skill.FieldId).ToBllField();
+            skillParents.Add(field);
+
+            while (field.ParentId != null)
+            {
+                field = fieldRepository.GetById(field.ParentId.GetValueOrDefault()).ToBllField();
+                skillParents.Add(field);
+            }
+
+            return skillParents;
         }
 
         public void UpdateSkill(SkillEntity skill)

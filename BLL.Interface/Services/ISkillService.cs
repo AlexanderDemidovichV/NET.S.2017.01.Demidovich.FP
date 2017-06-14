@@ -13,7 +13,7 @@ namespace BLL.Interface.Services
         IEnumerable<SkillEntity> GetAllSkills();
         IEnumerable<SkillEntity> GetAllSkillsByField(FieldEntity field);
 
-        FieldEntity GetSkillParent(int skillId);
+        IEnumerable<FieldEntity> GetSkillParents(int skillId);
 
         void CreateSkill(SkillEntity skill);
         void DeleteSkill(SkillEntity skill);

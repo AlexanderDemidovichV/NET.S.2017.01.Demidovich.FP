@@ -20,3 +20,11 @@
 li img {
     vertical-align: middle;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.open {
+    font-size: 23px;
+}
