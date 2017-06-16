@@ -4,6 +4,7 @@ using BLL.Services;
 using DAL.Concrete;
 using DAL.Interface.Interface.Repository;
 using DAL.Interface.Repository;
+using DAL.NLog;
 using Ninject;
 using Ninject.Web.Common;
 using ORM;
@@ -50,7 +51,7 @@ namespace DependencyResolver
             kernel.Bind<ISkillService>().To<SkillService>();
             kernel.Bind<IRatingService>().To<RatingService>();
 
-            //kernel.Bind<ILogger>().To<Logger>().InSingletonScope();
+            kernel.Bind<ILogger>().To<KnowledgeLogger>().InSingletonScope();
         }
     }
 }

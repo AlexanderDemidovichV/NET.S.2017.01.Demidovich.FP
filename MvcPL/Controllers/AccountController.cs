@@ -35,23 +35,6 @@ namespace MvcPL.Controllers
         #region Public Methods
 
         [HttpGet]
-        public ActionResult Index()
-        {
-            var userProfileinput = new UserProfileInputModel();
-
-            userProfileinput.Id = _userService.GetUserEntityByLogin(User.Identity.Name).Id;
-
-            var profileEntity = _profileService.GetProfileEntity(userProfileinput.Id);
-            if (profileEntity != null)
-            {
-                userProfileinput.ImageData = profileEntity.ImageData;
-                userProfileinput.ImageMimeType = profileEntity.ImageMimeType;
-            }
-
-            return View(userProfileinput);
-        }
-
-        [HttpGet]
         public ActionResult Knowledges()
         {
             var mainFields = _fieldService.GetSubFields(null);
@@ -72,6 +55,23 @@ namespace MvcPL.Controllers
             }
 
             return View(knowledgeViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var userProfileinput = new UserProfileInputModel();
+
+            userProfileinput.Id = _userService.GetUserEntityByLogin(User.Identity.Name).Id;
+
+            var profileEntity = _profileService.GetProfileEntity(userProfileinput.Id);
+            if (profileEntity != null)
+            {
+                userProfileinput.ImageData = profileEntity.ImageData;
+                userProfileinput.ImageMimeType = profileEntity.ImageMimeType;
+            }
+
+            return View(userProfileinput);
         }
 
         [HttpGet]

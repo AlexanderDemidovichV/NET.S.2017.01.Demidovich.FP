@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using DAL.Interface.DTO;
 using DAL.Interface.Repository;
 using DAL.Mappers;
+using DAL.NLog;
 using ORM.Entities;
 using DAL.Visitor;
 
@@ -16,14 +17,16 @@ namespace DAL.Concrete
         #region Fields
 
         private readonly DbContext context;
+        private readonly ILogger logger;
 
         #endregion
 
         #region Constructor
 
-        public UserRepository(DbContext context)
+        public UserRepository(DbContext context, ILogger logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         #endregion
@@ -32,6 +35,7 @@ namespace DAL.Concrete
 
         public DalUser GetById(int id)
         {
+            logger.Info($"{nameof(id)} => {id}");
 
             return context.Set<User>()
                 .FirstOrDefault(user => user.Id == id)
@@ -40,6 +44,7 @@ namespace DAL.Concrete
 
         public DalUser GetByPredicate(Expression<Func<DalUser, bool>> predicate)
         {
+            logger.Info($"{nameof(predicate)} => {predicate.ToString()}");
 
             var newPredicate = predicate.Convert<DalUser, User>();
 
@@ -50,6 +55,7 @@ namespace DAL.Concrete
 
         public IEnumerable<DalUser> GetAll()
         {
+            logger.Info($"");
 
             return context.Set<User>()
                 .ToList()
@@ -58,12 +64,16 @@ namespace DAL.Concrete
 
         public void Create(DalUser user)
         {
+            logger.Info($"{nameof(user)} => login:{user.Id} login:{user.Login} email:{user.Email}");
+
             context.Set<User>()
                 .Add(user.ToOrmUser());
         }
 
         public void Delete(DalUser user)
         {
+            logger.Info($"{nameof(user)} => login:{user.Id} login:{user.Login} email:{user.Email}");
+
             var userToDelete = context.Set<User>().Single(u => u.Id == user.Id);
             context.Set<User>().Remove(userToDelete);
         }

@@ -4,5 +4,66 @@
     ViewBag.Title = Model.Field.Name;
 }
 
-<h2>Model.Field.Name</h2>
+@section Body {
 
+    
+
+    @Html.DisplayFor(m => m.Field)
+
+
+
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+        {
+
+            <div class="row">
+                <div class="btn-group col-md-offset-3 col-md-6">
+                    <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#board_input_tab">
+                        Add field
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div id="board_input_tab" class="row collapse">
+                    <div class="col-md-offset-1 col-md-10">
+
+                        <hr />
+
+                        @Html.EditorFor(m => m.FieldInput)
+
+                    </div>
+                </div>
+            </div>
+
+            <hr class="col-md-10 col-md-offset-1" />
+
+        }
+
+        if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.IsInRole("User"))
+        {
+            <div class="row">
+                <div class="btn-group col-md-offset-3 col-md-6">
+                    <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#topic_input_tab">
+                        Add skill
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="topic_input_tab" class="row collapse">
+                    <div class="col-md-offset-1 col-md-10">
+
+                        <hr />
+
+                        @Html.EditorFor(m => m.SkillInput)
+
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

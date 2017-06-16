@@ -15,9 +15,5 @@ namespace MvcPL.Models.Input
         [Required(ErrorMessage = "Please enter your skill subject.")]
         [StringLength(300, ErrorMessage = "The skill subject must contain at least {2} characters.", MinimumLength = 5)]
         public string Subject { get; set; }
-
-        [Display(Name = "Rating")]
-        [Required(ErrorMessage = "Please enter your rating.")]
-        public RatingInputModel Rating { get; set; }
     }
 }

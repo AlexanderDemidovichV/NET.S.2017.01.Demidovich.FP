@@ -11,7 +11,7 @@
             <thead>
             <tr>
                 
-                <th class="col-md-6 col-sm-6 col-xs-6">
+                <th class="col-md-3 col-sm-3 col-xs-6">
                     <h3 class="board_table_content">@Html.ActionLink(Model.Name, "Field", "Knowledge", new { id = Model.Id }, null)</h3>
                 </th>
             </tr>
@@ -40,7 +40,7 @@
             @foreach (var skill in Model.Skills)
             {
                 <tr>
-                    <td class="text-center">
+                    <td class="text-left">
                         <div class="board_table_content">
                             <i class="fa fa-2x fa-comments-o text-primary"></i>
                         </div>

@@ -130,12 +130,6 @@ namespace MvcPL.Controllers
 
                 _skillService.CreateSkill(skillEntity);
 
-                var ratingEntity = skillInput.Rating.ToBllRating();
-                ratingEntity.SkillId = _skillService.GetSkillByName(skillInput.Subject).Id;
-                ratingEntity.UserId = _userService.GetUserEntityByLogin(User.Identity.Name).Id;
-
-                _ratingService.CreateRating(ratingEntity);
-
                 if (Url.IsLocalUrl(HttpContext.Request.UrlReferrer.AbsolutePath))
                 {
                     return Redirect(HttpContext.Request.UrlReferrer.AbsolutePath);

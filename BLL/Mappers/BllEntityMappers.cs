@@ -104,7 +104,8 @@ namespace BLL.Mappers
             return new DalSkill
             {
                 Id = skill.Id,
-                Subject = skill.Subject
+                Subject = skill.Subject,
+                FieldId = skill.FieldId
             };
         }
 
@@ -116,7 +117,8 @@ namespace BLL.Mappers
             {
                 Id = skill.Id,
                 Subject = skill.Subject,
-                Ratings = ratings
+                Ratings = ratings,
+                FieldId = skill.FieldId
             };
         }
 
