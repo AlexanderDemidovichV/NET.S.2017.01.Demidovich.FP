@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Interface.Entities;
 using BLL.Interface.Services;
 using MvcPL.Infrastructure.Mappers;
 using MvcPL.Models.Input;
@@ -40,6 +41,7 @@ namespace MvcPL.Controllers
         [AllowAnonymous]
         public ActionResult Field(int id)
         {
+            ViewBag.UserVM = _userService.GetUserEntityByLogin(User.Identity.Name).ToPlUser(); 
             var field = _fieldService.GetField(id)
                 ?.ToPlField();
 
@@ -159,34 +161,41 @@ namespace MvcPL.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddRating(RatingInputModel ratingInput, int skillId)
+        public ActionResult AddRating(int skillId, int value, int fieldId)
         {
-            if (ModelState.IsValid)
+            bool isUpdate = (_ratingService
+                                 .GetSkillUserRatings(skillId, _userService.GetUserEntityByLogin(User.Identity.Name).Id)
+                                 .Any());
+
+
+            if (!isUpdate)
             {
-                var ratingEntity = ratingInput.ToBllRating();
-                ratingEntity.SkillId = skillId;
-                ratingEntity.UserId = _userService.GetUserEntityByLogin(User.Identity.Name).Id;
-
+                var ratingEntity = new RatingEntity
+                {
+                    UserId = _userService.GetUserEntityByLogin(User.Identity.Name).Id,
+                    Value = value,
+                    SkillId = skillId
+                };
                 _ratingService.CreateRating(ratingEntity);
-
-                return RedirectToAction("Skill", "Knowledge", new { id = skillId });
             }
             else
             {
-                ModelState.AddModelError("", "Incorrect input.");
-
-                var skill = _skillService.GetSkill(skillId)
-                    ?.ToPlSkill();
-
-                if (skill == null)
-                    return View("Error");
-
-                var knowledgeSkillViewModel = new KnowledgeSkillViewModel() { Skill = skill };
-                knowledgeSkillViewModel.RatingInput = ratingInput;
-
-                return View("Skill", knowledgeSkillViewModel);
+                var ratingEntity = new RatingEntity
+                {
+                    Id = _ratingService.GetSkillUserRatings(skillId, _userService.GetUserEntityByLogin(User.Identity.Name).Id).First(r => r.SkillId == skillId).Id,
+                    UserId = _userService.GetUserEntityByLogin(User.Identity.Name).Id,
+                    Value = value,
+                    SkillId = skillId
+                };
+                _ratingService.UpdateRating(ratingEntity);
             }
+            
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Rated");
+            }
+            return RedirectToAction("Field", new { id = fieldId });
         }
 
         [AllowAnonymous]
@@ -200,8 +209,7 @@ namespace MvcPL.Controllers
                 var projection = skills.Select(t => new
                 {
                     id = t.Id,
-                    label = t.Subject,
-                    value = t.Subject
+                    label = t.Subject
                 });
 
                 return Json(projection.ToList(), JsonRequestBehavior.AllowGet);

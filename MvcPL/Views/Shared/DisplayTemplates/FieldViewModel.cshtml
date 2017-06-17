@@ -1,4 +1,5 @@
-﻿@model MvcPL.Models.FieldViewModel
+﻿@using MvcPL.Models
+@model MvcPL.Models.FieldViewModel
 
 @{
     Layout = null;
@@ -49,14 +50,24 @@
                         <h4 class="board_table_content">
                             @Html.ActionLink(@skill.Subject, "Skill", "Knowledge", new { id = skill.Id }, null)
                         </h4>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="forum-post-panel btn-group btn-group-xs" id = @string.Concat("rateNotice", @Model.Id)>
+                                @Ajax.ActionLink("Notice", "AddRating", "Knowledge", new { skillId = skill.Id, value = 1, fieldId = skill.FieldId }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "rateNotice" + Model.Id }, new { @class = "btn btn-danger fa fa-warning" })
+                            </div>
+                            <div class="forum-post-panel btn-group btn-group-xs" id=@string.Concat("rateInter", @Model.Id)>
+                                @Ajax.ActionLink("Intermediate", "AddRating", "Knowledge", new { skillId = skill.Id, value = 2, fieldId = skill.FieldId }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "rateInter" + Model.Id }, new { @class = "btn btn-danger fa fa-warning" })
+                            </div>
+                            <div class="forum-post-panel btn-group btn-group-xs" id=@string.Concat("rateAdvanced", @Model.Id)>
+                                @Ajax.ActionLink("Advanced", "AddRating", "Knowledge", new { skillId = skill.Id, value = 3, fieldId = skill.FieldId }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "rateAdvanced" + Model.Id }, new { @class = "btn btn-danger fa fa-warning" })
+                            </div>
+                        }
                     </td>
                     <td class="text-center hidden-xs hidden-sm">
                         <div class="board_table_content"></div>
                     </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <div class="board_table_content">@skill.RatingCount</div>
-                    </td>
                 </tr>
+                
             }
 
             </tbody>

@@ -194,6 +194,7 @@
       <DependentUpon>ReportSet.xsd</DependentUpon>
     </Content>
     <Content Include="Views\Knowledge\Field.cshtml" />
+    <Content Include="Views\Account\ReportTemplate.cshtml" />
     <None Include="Views\Report\ReportSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -204,6 +205,7 @@
     </Content>
     <Content Include="Views\Shared\EditorTemplates\FieldInputModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SkillInputModel.cshtml" />
+    <Content Include="Views\Shared\_Rated.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -250,6 +252,7 @@
     <Compile Include="Models\Input\UserProfileInputModel.cs" />
     <Compile Include="Models\Input\UserRegistrationInputModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
+    <Compile Include="Models\Report\ReportTableLayout.cs" />
     <Compile Include="Models\SkillViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\View\KnowledgeFieldViewModel.cs" />

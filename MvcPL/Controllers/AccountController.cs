@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BLL.Interface.Services;
 using MvcPL.Infrastructure.Mappers;
 using MvcPL.Models.Input;
+using MvcPL.Models.Report;
 using MvcPL.Models.View;
 using MvcPL.Providers;
+using Root.Reports;
 
 namespace MvcPL.Controllers
 {
@@ -18,16 +22,19 @@ namespace MvcPL.Controllers
         private readonly IUserService _userService;
         private readonly IProfileService _profileService;
         private readonly IFieldService _fieldService;
+        private readonly ISkillService _skillService;
+
 
         #endregion
 
         #region Constructor
 
-        public AccountController(IUserService userService, IProfileService profileService, IFieldService fieldService)
+        public AccountController(IUserService userService, IProfileService profileService, IFieldService fieldService, ISkillService skillService)
         {
             _userService = userService;
             _profileService = profileService;
             _fieldService = fieldService;
+            _skillService = skillService;
         }
 
         #endregion
@@ -35,8 +42,27 @@ namespace MvcPL.Controllers
         #region Public Methods
 
         [HttpGet]
+        public ActionResult ReportTemplate()
+        {
+            var skills = _skillService.GetAllSkills();
+    
+            SelectList skillList = new SelectList(skills, "Id", "Subject");
+
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "Novice"});
+            list.Add(new SelectListItem { Value = "Intermediate" });
+            list.Add(new SelectListItem { Value = "Advanced" });
+            ViewBag.LevelList = list;
+
+            return View(skillList);
+        }
+
+        [HttpGet]
         public ActionResult Knowledges()
         {
+            //RT.PrintPDF(new ReportTableLayout());
+            //RT.ViewPDF(new ReportTableLayout(), "KnowledgeManagerReport.pdf");
+
             var mainFields = _fieldService.GetSubFields(null);
 
             var knowledgeViewModel = new KnowledgesViewModel();

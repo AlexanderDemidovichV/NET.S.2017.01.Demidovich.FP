@@ -60,6 +60,13 @@ namespace BLL.Services
                 .Select(r => r.ToBllRating());
         }
 
+        public IEnumerable<RatingEntity> GetSkillUserRatings(int skillId, int userId)
+        {
+            return ratingRepository.GetAll()
+                .Where(r => r.SkillId == skillId).Where(r => r.UserId == userId)
+                .Select(r => r.ToBllRating());
+        }
+
         public void UpdateRating(RatingEntity rating)
         {
             ratingRepository.Update(rating.ToDalRating());

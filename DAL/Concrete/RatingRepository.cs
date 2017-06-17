@@ -72,9 +72,12 @@ namespace DAL.Concrete
             var oldRating = context.Set<Rating>()
                 .FirstOrDefault(r => r.Id == entity.Id);
 
-            oldRating.Value = entity.Value;
+            if (oldRating != null)
+            {
+                oldRating.Value = entity.Value;
 
-            context.Entry(oldRating).State = EntityState.Modified;
+                context.Entry(oldRating).State = EntityState.Modified;
+            }
         }
 
         #endregion

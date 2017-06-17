@@ -7,6 +7,7 @@ namespace BLL.Interface.Services
     {
         RatingEntity GetRatingEntity(int id);
         IEnumerable<RatingEntity> GetSkillRatings(int skillId);
+        IEnumerable<RatingEntity> GetSkillUserRatings(int skillId, int userId);
 
         void DeleteRating(int id);
 
