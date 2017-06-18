@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Web;
 using Root.Reports;
-using System.IO;
+using BLL.Interface.Entities;
 
 namespace MvcPL.Models.Report
 {
+
     public class ReportTableLayout: Root.Reports.Report
     {
         private FontDef fontDef_Helvetica;
@@ -16,6 +14,19 @@ namespace MvcPL.Models.Report
         private Double rPosRight = 195;  // millimeters
         private Double rPosTop = 24;  // millimeters
         private Double rPosBottom = 278;  // millimeters
+        private IEnumerable<UserEntity> users;
+
+        public ReportTableLayout(IEnumerable<UserEntity> users)
+        {
+            this.users = users;
+        }
+
+        enum Levels
+        {
+            Novice,
+            Intermediate,
+            Advanced
+        }
 
         /// <summary>Creates this report.</summary>
         /// <remarks>
@@ -41,13 +52,13 @@ namespace MvcPL.Models.Report
 
                 // define columns
                 TlmColumn col;
-                col = new TlmColumnMM(tlm, "ID", 13);
+                col = new TlmColumnMM(tlm, "Level", 30);
 
                 col = new TlmColumnMM(tlm, "Name", 40);
                 col.tlmCellDef_Default.tlmTextMode = TlmTextMode.MultiLine;
 
 
-                TlmColumn col_Phone = new TlmColumnMM(tlm, "Phone", rPosRight - rPosLeft - tlm.rWidthMM);
+                TlmColumn col_Phone = new TlmColumnMM(tlm, "Email", rPosRight - rPosLeft - tlm.rWidthMM);
 
                 col_Phone.fontProp_Header = new FontPropMM(fontDef_Helvetica, 1.9, Color.Brown);
                 col_Phone.tlmCellDef_Header.rAlignH = RepObj.rAlignRight;
@@ -56,21 +67,35 @@ namespace MvcPL.Models.Report
                 col_Phone.tlmCellDef_Default.brushProp_Back = brushProp_Phone;
 
                 // open data set
-                
-                tlm.NewRow();
-                tlm.Add(0, new RepString(fontProp_Text, "0"));
-                tlm.Add(1, new RepString(fontProp_Text, "name"));
-                tlm.Add(2, new RepString(fontProp_Text, "+375295160323"));
+                foreach (var user in users)
+                {
+                    tlm.NewRow();
+                    switch (user.Id)
+                    {
+                        case 1:
+                        {
+                            tlm.Add(0, new RepString(fontProp_Text, Levels.Novice.ToString()));
+                            break;
+                        }
 
-                tlm.NewRow();
-                tlm.Add(0, new RepString(fontProp_Text, "0"));
-                tlm.Add(1, new RepString(fontProp_Text, "name"));
-                tlm.Add(2, new RepString(fontProp_Text, "+375295160323"));
+                        case 2:
+                        {
+                            tlm.Add(0, new RepString(fontProp_Text, Levels.Intermediate.ToString()));
+                            break;
+                        }
+                        case 3:
+                        {
+                            tlm.Add(0, new RepString(fontProp_Text, Levels.Advanced.ToString()));
+                            break;
+                        }
+                    }
+                    
+                    tlm.Add(1, new RepString(fontProp_Text, user.Login));
+                    tlm.Add(2, new RepString(fontProp_Text, user.Email));
+                }
 
             }
-            //page_Cur.AddCT_MM(rPosLeft + tlm.rWidthMM / 2, rPosTop + tlm.rCurY_MM + 2, new RepString(fontProp_Text, "- end of table -"));
 
-            // print page number and current date/time
             Double rY = rPosBottom + 1.5;
             foreach (Page page in enum_Page)
             {
@@ -79,7 +104,6 @@ namespace MvcPL.Models.Report
             }
         }
 
-        //------------------------------------------------------------------------------------------30.10.2004
         /// <summary>Creates a new page.</summary>
         /// <param name="oSender">Sender</param>
         /// <param name="ea">Event argument</param>
@@ -103,4 +127,6 @@ namespace MvcPL.Models.Report
             page_Cur.AddMM(rPosLeft, rPosBottom - ea.container.rHeightMM, ea.container);
         }
     }
+
+    
 }

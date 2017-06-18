@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BLL.Interface.Entities;
 using BLL.Interface.Services;
 using MvcPL.Infrastructure.Mappers;
 using MvcPL.Models.Input;
+using MvcPL.Models.Report;
 using MvcPL.Models.View;
+using Root.Reports;
 
 namespace MvcPL.Controllers
 {
@@ -36,6 +36,8 @@ namespace MvcPL.Controllers
         #endregion
 
         #region Public methods
+
+        
 
         [HttpGet]
         [AllowAnonymous]
@@ -98,26 +100,28 @@ namespace MvcPL.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Skill(int id)
+        public ActionResult ReportTemplate()
         {
-            var skill = _skillService.GetSkill(id)
-                ?.ToPlSkill();
+            var skills = _skillService.GetAllSkills();
 
-            if (skill == null)
-                return HttpNotFound();
+            SelectList skillList = new SelectList(skills, "Id", "Subject");
 
-            foreach (var rating in skill.Ratings)
+
+            return View(skillList);
+        }
+
+        [HttpGet]
+        public void Report(int skillId)
+        {
+            var ratings = _ratingService.GetSkillRatings(skillId);
+            var users = new List<UserEntity>();
+            foreach (var rating in ratings)
             {
-                rating.User = _userService.GetUserEntity(rating.User.Id).ToPlUser();
+                var user = _userService.GetUserEntity(rating.UserId);
+                user.Id = rating.Value;
+                users.Add(user);
             }
-
-            var knowledgeSkillViewModel = new KnowledgeSkillViewModel() { Skill = skill };
-            knowledgeSkillViewModel.RatingInput.SkillId = id;
-            knowledgeSkillViewModel.ParentFields = _skillService.GetSkillParents(id).Select(b => b.ToPlField()).Reverse().ToList();
-
-
-            return View(knowledgeSkillViewModel);
+            RT.ViewPDF(new ReportTableLayout(users), "KnowledgeManagerReport.pdf");
         }
 
         [HttpPost]
