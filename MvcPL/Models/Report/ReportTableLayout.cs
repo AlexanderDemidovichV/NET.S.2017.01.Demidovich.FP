@@ -14,14 +14,14 @@ namespace MvcPL.Models.Report
         private Double rPosRight = 195;  // millimeters
         private Double rPosTop = 24;  // millimeters
         private Double rPosBottom = 278;  // millimeters
-        private IEnumerable<UserEntity> users;
+        private IEnumerable<UserReportModel> users;
 
-        public ReportTableLayout(IEnumerable<UserEntity> users)
+        public ReportTableLayout(IEnumerable<UserReportModel> users)
         {
             this.users = users;
         }
 
-        enum Levels
+        private enum Levels
         {
             Novice,
             Intermediate,
@@ -70,7 +70,7 @@ namespace MvcPL.Models.Report
                 foreach (var user in users)
                 {
                     tlm.NewRow();
-                    switch (user.Id)
+                    switch (user.Level)
                     {
                         case 1:
                         {

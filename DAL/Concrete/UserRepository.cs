@@ -55,7 +55,6 @@ namespace DAL.Concrete
 
         public IEnumerable<DalUser> GetAll()
         {
-            logger.Info($"");
 
             return context.Set<User>()
                 .ToList()

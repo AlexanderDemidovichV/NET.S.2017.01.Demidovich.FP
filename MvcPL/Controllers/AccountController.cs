@@ -37,7 +37,6 @@ namespace MvcPL.Controllers
 
         #region Public Methods
 
-        
 
         [HttpGet]
         public ActionResult Knowledges()
@@ -84,8 +83,8 @@ namespace MvcPL.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            //if (User.Identity.IsAuthenticated)
-            //    return RedirectToAction("Index", "Home");
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Knowledges", "Account");
             return View();
         }
 
@@ -116,7 +115,7 @@ namespace MvcPL.Controllers
                 if (membershipUser != null)
                 {
                     FormsAuthentication.SetAuthCookie(userRegistrationInputModel.Login, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Knowledges", "Account");
                 }
             }
 
@@ -129,8 +128,8 @@ namespace MvcPL.Controllers
         [AllowAnonymous]
         public ActionResult LogIn()
         {
-            //if (User.Identity.IsAuthenticated)
-            //    return RedirectToAction("Index", "Home");
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Knowledges", "Account");
 
             return View();
         }
@@ -150,7 +149,7 @@ namespace MvcPL.Controllers
                     {
                         return Redirect(HttpContext.Request.UrlReferrer.AbsolutePath);
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Knowledges", "Account");
                 }
             }
 
@@ -169,7 +168,7 @@ namespace MvcPL.Controllers
                 return Redirect(HttpContext.Request.UrlReferrer.AbsolutePath);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogIn", "Account");
         }
 
         [AllowAnonymous]
@@ -231,10 +230,7 @@ namespace MvcPL.Controllers
             {
                 return File(profile.ImageData, profile.ImageMimeType);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         #endregion

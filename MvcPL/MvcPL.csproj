@@ -241,6 +241,7 @@
     <Compile Include="Models\Input\UserRegistrationInputModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
     <Compile Include="Models\Report\ReportTableLayout.cs" />
+    <Compile Include="Models\Report\UserReportModel.cs" />
     <Compile Include="Models\SkillViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\View\KnowledgeFieldViewModel.cs" />

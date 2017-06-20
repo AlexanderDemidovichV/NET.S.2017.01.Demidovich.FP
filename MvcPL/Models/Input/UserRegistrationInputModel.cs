@@ -6,14 +6,14 @@ namespace MvcPL.Models.Input
     {
         [Display(Name = "Login")]
         [Required(ErrorMessage = "Please enter your login.")]
-        //[System.Web.Mvc.Remote("VerifyUserExists", "Account", ErrorMessage = "This login is already exist.")]
+        [System.Web.Mvc.Remote("VerifyUserExists", "Account", ErrorMessage = "This login is already exist.")]
         [RegularExpression(@"[A-Za-z0-9._-]+", ErrorMessage = "The login can contain only [A-Za-z0-9._-] symbols.")]
         [StringLength(30, ErrorMessage = "The login must contain at least {2} characters.", MinimumLength = 4)]
         public string Login { get; set; }
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Please enter your email.")]
-        //[System.Web.Mvc.Remote("VerifyEmailExists", "Account", ErrorMessage = "This email is already in use.")]
+        [System.Web.Mvc.Remote("VerifyEmailExists", "Account", ErrorMessage = "This email is already in use.")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please enter a valid email.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

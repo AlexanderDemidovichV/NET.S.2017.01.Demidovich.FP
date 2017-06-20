@@ -106,20 +106,47 @@ namespace MvcPL.Controllers
 
             SelectList skillList = new SelectList(skills, "Id", "Subject");
 
-
             return View(skillList);
         }
 
-        [HttpGet]
-        public void Report(int skillId)
+        [HttpPost]
+        public ActionResult ReportTemplate(string skill, string level)
         {
-            var ratings = _ratingService.GetSkillRatings(skillId);
-            var users = new List<UserEntity>();
-            foreach (var rating in ratings)
+            var skills = _skillService.GetAllSkills();
+
+            SelectList skillList = new SelectList(skills, "Id", "Subject");
+            Report(int.Parse(skill), level);
+            return View(skillList);
+        }
+
+        [NonAction]
+        public void Report(int skillId, string level)
+        {
+            int rate = 1;
+            switch (level)
+            {
+                case "Novice":
+                    rate = 1; break;
+                case "Intermediate":
+                    rate = 2; break;
+                case "Advanced":
+                    rate = 3;
+                    break;
+            }
+            var ratings = _ratingService.GetSkillRatings(skillId).Where(r => r.Value == rate);
+            var ratingEntities = ratings as IList<RatingEntity> ?? ratings.ToList();
+            var users = new List<UserReportModel>();
+           
+            foreach (var rating in ratingEntities)
             {
                 var user = _userService.GetUserEntity(rating.UserId);
-                user.Id = rating.Value;
-                users.Add(user);
+                var userReport = new UserReportModel()
+                {
+                    Login = user.Login,
+                    Email = user.Email,
+                    Level = rating.Value
+                };
+                users.Add(userReport);
             }
             RT.ViewPDF(new ReportTableLayout(users), "KnowledgeManagerReport.pdf");
         }
@@ -167,9 +194,9 @@ namespace MvcPL.Controllers
         [HttpPost]
         public ActionResult AddRating(int skillId, int value, int fieldId)
         {
-            bool isUpdate = (_ratingService
+            bool isUpdate = _ratingService
                                  .GetSkillUserRatings(skillId, _userService.GetUserEntityByLogin(User.Identity.Name).Id)
-                                 .Any());
+                                 .Any();
 
 
             if (!isUpdate)
@@ -202,34 +229,6 @@ namespace MvcPL.Controllers
             return RedirectToAction("Field", new { id = fieldId });
         }
 
-        [AllowAnonymous]
-        public ActionResult FindSkill(string term)
-        {
-            var skills = _skillService.FindSkills(term).Select(t => t.ToPlSkill());
-
-            if (Request.IsAjaxRequest())
-            {
-
-                var projection = skills.Select(t => new
-                {
-                    id = t.Id,
-                    label = t.Subject
-                });
-
-                return Json(projection.ToList(), JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                if (skills.Count() == 1)
-                {
-                    return RedirectToAction("Skill", "Knowledge", new { id = skills.First().Id });
-                }
-
-                return View(skills);
-
-            }
-
-        }
 
         #endregion
     }
